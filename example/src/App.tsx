@@ -1,17 +1,50 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-jsi-module';
+import { StyleSheet, View, Button } from 'react-native';
+import {
+  callMeLater,
+  getNumbers,
+  getObject,
+  promiseNumber,
+  reverseString,
+} from 'react-native-jsi-module';
 
 export default function App() {
-  const [result, setResult] = useState<number | undefined>();
-
-  useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button
+        title="reverse string"
+        onPress={() => {
+          console.log(reverseString('reverse string'));
+        }}
+      />
+      <Button
+        title="get number"
+        onPress={() => {
+          console.log(getNumbers());
+        }}
+      />
+      <Button
+        title="get object"
+        onPress={() => {
+          console.log(getObject());
+        }}
+      />
+      <Button
+        title="promise"
+        onPress={async () => {
+          const value = await promiseNumber(5);
+
+          console.log('promised value is: ', value);
+        }}
+      />
+      <Button
+        title="callbacks"
+        onPress={() => {
+          callMeLater(
+            () => console.log('success'),
+            () => console.log('failure')
+          );
+        }}
+      />
     </View>
   );
 }
