@@ -9,7 +9,13 @@ add_library(react-native-jsi-module            SHARED
             cpp-adapter.cpp
 )
 
+find_package(ReactAndroid REQUIRED CONFIG)
+
 # Specifies a path to native header files.
 include_directories(
             ../cpp
+)
+
+target_link_libraries(react-native-jsi-module
+        ReactAndroid::jsi
 )
